@@ -62,6 +62,11 @@ ExtensionPluginManagerPrivate::ExtensionPluginManagerPrivate(ExtensionPluginMana
     // TODO(zhangs): more ext paths supported
 #ifdef EXTENSIONS_PATH
     defaultPluginPath = EXTENSIONS_PATH;
+    #ifdef QT_DEBUG
+        QString appPath = QCoreApplication::applicationDirPath();
+        QDir pluginDir(appPath + "/../../plugins/extensions");
+        defaultPluginPath = pluginDir.absolutePath();
+    #endif
 #else
 #    error You Should setting pluginDefaultPath
 #endif
